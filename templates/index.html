@@ -1,0 +1,72 @@
+<!-- Built by Manaswin Tripathi (@manaswintripathi) -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Attendance Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>📚 Smart Attendance Predictor</h1>
+      <p class="subtitle">Know exactly where you stand on the 75% rule — and what it takes to stay safe.</p>
+    </div>
+    <div class="top-actions">
+      <button id="seed-btn" class="btn secondary" type="button">Restore sample data</button>
+      <button id="clear-btn" class="btn danger-outline" type="button">Clear all</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="overall-card" class="card overall" aria-live="polite">
+      <h2>Overall attendance</h2>
+      <div class="overall-grid">
+        <div class="big-number"><span id="overall-pct">—</span><small>%</small></div>
+        <div>
+          <p><strong id="overall-count">—</strong> classes attended</p>
+          <div class="progress"><div id="overall-bar" class="progress-fill" style="width:0%"></div></div>
+          <p id="overall-status" class="status-line">Loading…</p>
+          <p id="overall-advice" class="advice"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Predictor calculator</h2>
+      <p class="muted">Try any numbers without saving them.</p>
+      <form id="predict-form" class="form-row">
+        <label>Attended <input type="number" id="pred-attended" min="0" value="134" required></label>
+        <label>Total <input type="number" id="pred-total" min="0" value="181" required></label>
+        <label>Target % <input type="number" id="pred-target" min="1" max="100" step="0.5" value="75" required></label>
+        <button class="btn" type="submit">Calculate</button>
+      </form>
+      <p id="predict-result" class="result" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>Add a subject</h2>
+      <form id="add-form" class="form-row">
+        <label class="grow">Subject name <input type="text" id="new-name" placeholder="e.g. Data Structures" required></label>
+        <label>Attended <input type="number" id="new-attended" min="0" value="0" required></label>
+        <label>Total <input type="number" id="new-total" min="0" value="0" required></label>
+        <button class="btn" type="submit">Add subject</button>
+      </form>
+      <p id="form-error" class="error" role="alert"></p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Your subjects</h2>
+      <div id="subjects" class="subjects-grid"></div>
+      <p id="empty-state" class="muted" hidden>No subjects yet. Add one above, or restore the sample data.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Built by Manaswin Tripathi (@manaswintripathi) · Smart Attendance Predictor · 75% rule, made simple.
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
